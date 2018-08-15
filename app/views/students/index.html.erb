@@ -1,0 +1,15 @@
+<h1>Search Students</h1>
+<%= form_tag(students_path, method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+
+<% if @students.present? %>
+<% @students.each do |student| %>
+  <%= render partial: 'student', locals: { student: student} %>
+  <% end %>
+<% else %>
+  <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
+<% end %>
