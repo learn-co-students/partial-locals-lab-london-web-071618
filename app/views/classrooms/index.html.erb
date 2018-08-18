@@ -1,0 +1,22 @@
+<h1>All Classrooms</h1>
+
+<ul>
+<% @classrooms.each do |classroom| %>
+<li><%=link_to "#{classroom.course_name} | #{classroom.semester}", classroom_path(classroom)%></li>
+<%end%>
+</ul>
+
+<h2>Search for a Student</h2>
+<%= form_tag("/classrooms", method:"get") do%>
+<%= label_tag "Student Name" %>
+<%= text_field_tag :student %>
+<%= submit_tag 'Search', name: nil %>
+<%end%>
+
+<% if @students %>
+  <% @students.each do |student| %>
+  <%= render partial: 'students/student', locals: {student: student}%>
+  <% end%>
+<% elsif @students == nil %>
+  <p>Cannot find student</p>
+<% end%>
